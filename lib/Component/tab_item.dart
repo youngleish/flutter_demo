@@ -5,7 +5,7 @@ class IconTab extends StatefulWidget {
   // 可以配置项
   final String text;
   final String icon;
-  final String color;
+  final Color color;
 
   IconTab({
     this.text,
@@ -43,7 +43,9 @@ class _IconTabState extends State<IconTab> {
         Text(
           widget.text,
           softWrap: false,
-          style: TextStyle(color: widget.color),
+          style: TextStyle(
+            color: widget.color,
+          ),
         )
       ],
     );
