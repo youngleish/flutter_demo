@@ -51,9 +51,11 @@ class _IconTabState extends State<IconTab> {
     );
 
     //  导航栏有固定高度，所以要用尺寸盒子包裹起来
-    return SizedBox(
-      height: 53.0,
-      child: icon,
+    return SafeArea( // 安全距离
+      child: SizedBox(
+        height: 53.0,
+        child: icon,
+      )
     );
   }
 }

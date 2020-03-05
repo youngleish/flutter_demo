@@ -47,6 +47,7 @@ class _BOSSAppState extends State<BOSSApp> with SingleTickerProviderStateMixin {
           MessageScreen(),
           MineScreen()  
         ],
+        physics: NeverScrollableScrollPhysics(), // 关闭左右滑动切换tab
         controller: _controller,
       ),
       bottomNavigationBar: Material(
@@ -56,24 +57,24 @@ class _BOSSAppState extends State<BOSSApp> with SingleTickerProviderStateMixin {
           labelStyle: TextStyle(fontSize: 11),
           tabs: <Widget>[
             IconTab(
-              icon: _currentIndex == 0 ? 'assets/images/ic_main_tab_find_nor.png' : 'assets/images/ic_main_tab_find_pre.png',
+              icon: _currentIndex == 0 ? 'assets/images/ic_main_tab_find_pre.png' : 'assets/images/ic_main_tab_find_nor.png',
               text: '职位',
-              color: _currentIndex == 0 ? Colors.red : Colors.blue,
+              color: _currentIndex == 0 ? Color.fromARGB(255, 0, 215, 198) : Colors.grey,
             ),
             IconTab(
-              icon: _currentIndex == 1 ? 'assets/images/ic_main_tab_find_nor.png' : 'assets/images/ic_main_tab_find_pre.png',
-              text: '职位',
-              color: _currentIndex == 1 ? Colors.red : Colors.blue,
+              icon: _currentIndex == 1 ? 'assets/images/ic_main_tab_company_pre.png' : 'assets/images/ic_main_tab_company_nor.png',
+              text: '公司',
+              color: _currentIndex == 1 ? Theme.of(context).primaryColor : Colors.grey, // 还可以直接使用main.dart中定义的主题色
             ),
             IconTab(
-              icon: _currentIndex == 2 ? 'assets/images/ic_main_tab_find_nor.png' : 'assets/images/ic_main_tab_find_pre.png',
-              text: '职位',
-              color: _currentIndex == 2 ? Colors.red : Colors.blue,
+              icon: _currentIndex == 2 ? 'assets/images/ic_main_tab_contacts_pre.png' : 'assets/images/ic_main_tab_contacts_nor.png',
+              text: '消息',
+              color: _currentIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
             ),
             IconTab(
-              icon: _currentIndex == 3 ? 'assets/images/ic_main_tab_find_nor.png' : 'assets/images/ic_main_tab_find_pre.png',
-              text: '职位',
-              color: _currentIndex == 3 ? Colors.red : Colors.blue,
+              icon: _currentIndex == 3 ? 'assets/images/ic_main_tab_my_pre.png' : 'assets/images/ic_main_tab_my_nor.png',
+              text: '个人',
+              color: _currentIndex == 3 ? Theme.of(context).primaryColor : Colors.grey,
             )
         ]),
       ),
