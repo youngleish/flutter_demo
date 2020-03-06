@@ -29,7 +29,7 @@ class _WelcomePage extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color.fromARGB(255, 0, 215, 198),
+      color: Theme.of(context).primaryColor,
       child: Center(
         child: Text(
           '欢迎来看',
