@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/item/company_item.dart';
 import 'package:flutter_demo/model/companylist_item.dart';
+import 'package:flutter_demo/screen/Company/Company_detail.dart';
 
 class CompanyScreen extends StatefulWidget {
   @override
@@ -142,21 +144,37 @@ class _CompanyScreenState extends State<CompanyScreen> {
         child: ListView.builder(
           itemCount: _companyList.length,
           itemBuilder: (context, index) {
-            Company company = _companyList[index];
-            return Text(company.name);
+            return buildCompanyItem(context, index);
           } ,
         )
       )
     );
-    // return Material(
-    //   color: Color.fromARGB(255, 0, 215, 198),
-    //   child: Center(
-    //     child: Text(
-    //       '公司',
-    //       style: TextStyle(
-    //           fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
-    //     ),
-    //   ),
+  }
+  buildCompanyItem(BuildContext context, int index) {
+    Company company = _companyList[index];
+    // return CompanyListItem(company);
+    // return ListTile(
+    //   onTap: () => {
+
+    //   },
+    //   title: CompanyListItem(company),
     // );
+    var companyItem = InkWell(
+      onTap: (){
+        navCompanyDetail(company);
+      },
+      child: CompanyListItem(company),
+    );
+    return companyItem;
+  }
+  // 页面跳转
+  navCompanyDetail(Company company) {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        // 跳转的路由
+        builder: (context) => new CompanyDetail(company)
+      )
+    );
   }
 }
