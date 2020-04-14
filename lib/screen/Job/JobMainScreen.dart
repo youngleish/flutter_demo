@@ -103,14 +103,24 @@ class _JobScreenState extends State<JobScreen> {
           )
         ],
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount: _jobList.length,
-          itemBuilder: buildJobItem
-        ),
+      body: RefreshIndicator(
+        child: Center(
+          child: ListView.builder(
+            itemCount: _jobList.length,
+            itemBuilder: buildJobItem
+          ),
+        ), 
+        onRefresh: _onRefresh
       ),
     );
   }
+
+  Future<void> _onRefresh() async{
+    await Future.delayed(Duration(seconds: 3), (){
+      print('_onrefresh');
+    });
+  }  
+
   Widget buildJobItem(BuildContext context, int index) {
     Job job = _jobList[index];
     var jobItem = new InkWell(
