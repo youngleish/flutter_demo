@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/item/job_item.dart';
+import 'package:flutter_demo/model/job.dart';
 
 class JobScreen extends StatefulWidget {
   @override
@@ -11,17 +13,112 @@ class JobScreen extends StatefulWidget {
 }
 
 class _JobScreenState extends State<JobScreen> {
+  List<Job> _jobList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // 数据加载
+    getJobList();
+  }
+
+  getJobList() {
+    setState(() {
+      _jobList = Job.fromJson("""
+        {
+          "list": [
+            {
+              "name": "架构师（Android）",
+              "cname": "蚂蚁金服",
+              "size": "B轮",
+              "salary": "25k-45k",
+              "username": "Claire",
+              "title": "HR"
+            },
+            {
+              "name": "资深iOS架构师",
+              "cname": "今日头条",
+              "size": "D轮",
+              "salary": "40k-60k",
+              "username": "Kimi",
+              "title": "HRBP"
+            },
+            {
+              "name": "架构师（大前端）",
+              "cname": "蚂蚁金服",
+              "size": "B轮",
+              "salary": "25k-45k",
+              "username": "Claire",
+              "title": "HR"
+            },
+            {
+              "name": "资深Android架构师",
+              "cname": "今日头条",
+              "size": "D轮",
+              "salary": "40k-60k",
+              "username": "Kimi",
+              "title": "HRBP"
+            },
+            {
+              "name": "架构师（Android）",
+              "cname": "蚂蚁金服",
+              "size": "B轮",
+              "salary": "25k-45k",
+              "username": "Claire",
+              "title": "HR"
+            },
+            {
+              "name": "Flutter工程师",
+              "cname": "今日头条",
+              "size": "D轮",
+              "salary": "40k-60k",
+              "username": "Kimi",
+              "title": "HRBP"
+            }
+          ]
+        }
+      """);
+    });
+  }  
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Color.fromARGB(255, 0, 215, 198),
-      child: Center(
-        child: Text(
-          '公司',
-          style: TextStyle(
-              fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
+    return Scaffold(
+      // backgroundColor: Color.fromARGB(255, 242, 242, 245),
+      appBar: new AppBar(
+        elevation: 0.0,
+        title: Text(
+          '职位',
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.access_alarm,
+              color: Colors.white,
+            ), 
+            onPressed: () {
+              print('点击按钮了');
+            }
+          )
+        ],
+      ),
+      body: Center(
+        child: ListView.builder(
+          itemCount: _jobList.length,
+          itemBuilder: buildJobItem
         ),
       ),
     );
+  }
+  Widget buildJobItem(BuildContext context, int index) {
+    Job job = _jobList[index];
+    var jobItem = new InkWell(
+      onTap: () {
+        print('点击列表');
+      },
+      child: new JobListItem(job),
+    );
+    return jobItem; 
   }
 }
