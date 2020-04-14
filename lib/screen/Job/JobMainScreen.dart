@@ -14,12 +14,22 @@ class JobScreen extends StatefulWidget {
 
 class _JobScreenState extends State<JobScreen> {
   List<Job> _jobList = [];
+  
+  // 滚动controller
+  ScrollController _scrollCtrl = ScrollController();
 
   @override
   void initState() {
     super.initState();
     // 数据加载
     getJobList();
+    // 监听事件
+    _scrollCtrl.addListener(() {
+      // 位置的坐标 == 最大区域
+      if (_scrollCtrl.position.pixels == _scrollCtrl.position.maxScrollExtent) {
+        print('滑动最底部了');
+      }
+    });
   }
 
   getJobList() {
@@ -107,7 +117,8 @@ class _JobScreenState extends State<JobScreen> {
         child: Center(
           child: ListView.builder(
             itemCount: _jobList.length,
-            itemBuilder: buildJobItem
+            itemBuilder: buildJobItem,
+            controller: _scrollCtrl
           ),
         ), 
         onRefresh: _onRefresh
